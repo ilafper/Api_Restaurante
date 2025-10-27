@@ -43,7 +43,7 @@ app.get('/api/menus', async (req, res) => {
     const { menus } = await connectToMongoDB();
     const listaMenus = await menus.find().toArray();
     console.log(listaMenus);
-    res.json(lista);
+    res.json(listaMenus);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los especialistas' });
     console.log("nonononon");
