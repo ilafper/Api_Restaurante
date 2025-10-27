@@ -20,7 +20,6 @@ async function connectToMongoDB() {
     console.log("Conectado a MongoDB Atlas");
     const db = client.db('Restaurante');
     return {
-      
       menus: db.collection('menus'),
       pedidos: db.collection('pedidos'),
       
@@ -41,9 +40,9 @@ app.use((req, res, next) => {
 //endpoint para obtener todos los usuarios
 app.get('/api/menus', async (req, res) => {
   try {
-    const { usuarios } = await connectToMongoDB();
-    const lista = await usuarios.find().toArray();
-    console.log(lista);
+    const { menus } = await connectToMongoDB();
+    const listaMenus = await menus.find().toArray();
+    console.log(listaMenus);
     res.json(lista);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los especialistas' });
