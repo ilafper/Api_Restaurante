@@ -21,7 +21,7 @@ async function connectToMongoDB() {
     const db = client.db('Restaurante');
     return {
       
-      menus: db.collection('usuarios'),
+      menus: db.collection('menus'),
       pedidos: db.collection('pedidos'),
       
     };
