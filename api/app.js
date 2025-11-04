@@ -21,8 +21,8 @@ async function connectToMongoDB() {
     const db = client.db('Restaurante');
     return {
       menus: db.collection('menus'),
-      pedidos: db.collection('pedidos'),
-      
+      pedidos: db.collection('Pedidos'),
+
     };
   } catch (error) {
     console.error("Error al conectar a MongoDB:", error);
@@ -53,47 +53,43 @@ app.get('/api/menus', async (req, res) => {
 
 
 
-//endpoints usuario
-app.post('/api/pedidos', async (req, res) => {
+//endppoint Crear pedido
 
-    const { nombre, rango, region, via_principal } = req.body; 
+app.post('/api/Crearpedidos', async (req, res) => {
 
-    if (!nombre || !rango || !region || !via_principal) {
-      return res.status(400).json({ error: 'Faltan campos obligatorios...' });
-    }
+  const { nombre, correo } = req.body;
 
-    const nuevoPedido = {
-      
-    };
+  if (!nombre || !correo) {
+    return res.status(400).json({ error: 'Faltan campos obligatorios...' });
+  }
 
-    try {
-        const { usuarios } = await connectToMongoDB();
-        
-        const resultado = await usuarios.insertOne(nuevaTarjeta);
+  const nuevoPedido = {
 
-        console.log(`Tarjeta creada con ID: ${resultado.insertedId}`);
-        
-        res.status(201).json({ 
-            mensaje: 'Tarjeta creada y guardada con éxito',
-            id: resultado.insertedId,
-            tarjeta: nuevaTarjeta 
-        });
+    nombre:nombre,
+    correo:correo
 
-    } catch (error) {
-        // Manejo de errores 
-        console.error("Error al guardar la tarjeta en MongoDB:", error);
-        res.status(500).json({ error: 'Error interno del servidor al crear la tarjeta' });
-    }
+  };
+
+  try {
+    const { usuarios } = await connectToMongoDB();
+
+    const resultado = await usuarios.insertOne(nuevoPedido);
+
+    console.log(`Tarjeta creada con ID: ${resultado.insertedId}`);
+
+    res.status(201).json({
+      mensaje: 'Tarjeta creada y guardada con éxito',
+      id: resultado.insertedId,
+      tarjeta: nuevaTarjeta
+    });
+
+  } catch (error) {
+    // Manejo de errores 
+    console.error("Error al guardar la tarjeta en MongoDB:", error);
+    res.status(500).json({ error: 'Error interno del servidor al crear la tarjeta' });
+  }
 
 });
-
-
-
-
-
-
-
-
 
 
 module.exports = app;
