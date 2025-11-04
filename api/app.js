@@ -5,6 +5,7 @@ app.use(express.json());
 
 // Configura la conexión a MongoDB
 const uri = "mongodb+srv://ialfper:ialfper21@alumnos.zoinj.mongodb.net/alumnos?retryWrites=true&w=majority";
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
