@@ -71,18 +71,20 @@ app.post('/api/Crearpedidos', async (req, res) => {
   };
 
   try {
-    const { usuarios } = await connectToMongoDB();
+    const { pedidos } = await connectToMongoDB();
 
-    const resultado = await usuarios.insertOne(nuevoPedido);
+    const resultado = await pedidos.insertOne(nuevoPedido);
 
-    console.log(`Tarjeta creada con ID: ${resultado.insertedId}`);
+    console.log(`PEDIDO creado con ID: ${resultado.insertedId}`);
 
     res.status(201).json({
       mensaje: 'Tarjeta creada y guardada con éxito',
       id: resultado.insertedId,
-      tarjeta: nuevaTarjeta
+      pedido: nuevoPedido
     });
 
+
+    
   } catch (error) {
     // Manejo de errores 
     console.error("Error al guardar la tarjeta en MongoDB:", error);
