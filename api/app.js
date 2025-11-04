@@ -58,7 +58,7 @@ app.get('/api/menus', async (req, res) => {
 
 app.post('/api/Crearpedidos', async (req, res) => {
 
-  const {nuevoPedido} = req.body;
+  const nuevoPedido = req.body;
 
   if (!nuevoPedido.idMesa || !nuevoPedido.menu || !nuevoPedido.estado) {
     return res.status(400).json({ error: 'Faltan campos obligatorios...' });
