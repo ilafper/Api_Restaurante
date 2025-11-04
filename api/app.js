@@ -58,17 +58,13 @@ app.get('/api/menus', async (req, res) => {
 
 app.post('/api/Crearpedidos', async (req, res) => {
 
-  const {idMesa, nombre, correo } = req.body;
+  const {nuevoPedido} = req.body;
 
-  if (!idMesa || !nombre || !correo) {
+  if (!nuevoPedido.idMesa || !nuevoPedido.menu || !nuevoPedido.estado) {
     return res.status(400).json({ error: 'Faltan campos obligatorios...' });
   }
 
-  const nuevoPedido = {
-    mesaAsignada:idMesa,
-    nombre:nombre,
-    correo:correo
-  };
+  
 
   try {
     const { pedidos } = await connectToMongoDB();
