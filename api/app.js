@@ -57,17 +57,16 @@ app.get('/api/menus', async (req, res) => {
 
 app.post('/api/Crearpedidos', async (req, res) => {
 
-  const { nombre, correo } = req.body;
+  const {idMESA, nombre, correo } = req.body;
 
-  if (!nombre || !correo) {
+  if (!idMESA || !nombre || !correo) {
     return res.status(400).json({ error: 'Faltan campos obligatorios...' });
   }
 
   const nuevoPedido = {
-
+    mesaAsignada:idMESA,
     nombre:nombre,
     correo:correo
-
   };
 
   try {
@@ -78,13 +77,13 @@ app.post('/api/Crearpedidos', async (req, res) => {
     console.log(`PEDIDO creado con ID: ${resultado.insertedId}`);
 
     res.status(201).json({
-      mensaje: 'Tarjeta creada y guardada con éxito',
+      mensaje: 'PEDIDO ENVIADO',
       id: resultado.insertedId,
       pedido: nuevoPedido
     });
 
 
-    
+
   } catch (error) {
     // Manejo de errores 
     console.error("Error al guardar la tarjeta en MongoDB:", error);
