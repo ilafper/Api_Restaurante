@@ -65,7 +65,7 @@ app.post('/api/Crearpedidos', async (req, res) => {
   }
 
   const nuevoPedido = {
-    mesaAsignada:idMESA,
+    mesaAsignada:idMesa,
     nombre:nombre,
     correo:correo
   };
