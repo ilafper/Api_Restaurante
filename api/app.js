@@ -61,9 +61,7 @@ app.post('/api/Crearpedidos', async (req, res) => {
 
   try {
     const { pedidos } = await connectToMongoDB();
-
     const resultado = await pedidos.insertOne(nuevoPedido);
-
     console.log(`PEDIDO creado con ID: ${resultado.insertedId}`);
 
     res.status(201).json({
@@ -92,7 +90,7 @@ app.get('/api/pedidos', async (req, res) => {
     console.log(listaPedidos);
     res.json(listaPedidos);
 
-    
+
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los pedidos' });
     console.log("nonononon");
