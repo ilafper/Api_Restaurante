@@ -23,7 +23,6 @@ async function connectToMongoDB() {
     return {
       menus: db.collection('menus'),
       pedidos: db.collection('Pedidos'),
-
     };
   } catch (error) {
     console.error("Error al conectar a MongoDB:", error);
@@ -51,11 +50,7 @@ app.get('/api/menus', async (req, res) => {
   }
 });
 
-
-
-
-//endppoint Crear pedido
-
+//endppoint crear pedido.
 app.post('/api/Crearpedidos', async (req, res) => {
 
   const nuevoPedido = req.body;
@@ -63,8 +58,6 @@ app.post('/api/Crearpedidos', async (req, res) => {
   if (!nuevoPedido.idMesa || !nuevoPedido.menu || !nuevoPedido.estado) {
     return res.status(400).json({ error: 'Faltan campos obligatorios...' });
   }
-
-  
 
   try {
     const { pedidos } = await connectToMongoDB();
@@ -87,6 +80,23 @@ app.post('/api/Crearpedidos', async (req, res) => {
     res.status(500).json({ error: 'Error interno del servidor al crear la tarjeta' });
   }
 
+});
+
+
+
+//endpoint para pedidos
+app.get('/api/pedidos', async (req, res) => {
+  try {
+    const { pedidos } = await connectToMongoDB();
+    const listaPedidos = await pedidos.find().toArray();
+    console.log(listaPedidos);
+    res.json(listaPedidos);
+
+    
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener los pedidos' });
+    console.log("nonononon");
+  }
 });
 
 
