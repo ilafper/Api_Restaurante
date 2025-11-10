@@ -20,6 +20,7 @@ async function connectToMongoDB() {
     client.connect();
     console.log("Conectado a MongoDB Atlas");
     const db = client.db('Restaurante');
+    
     return {
       menus: db.collection('menus'),
       pedidos: db.collection('Pedidos'),
