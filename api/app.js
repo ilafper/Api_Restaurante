@@ -87,6 +87,7 @@ app.get('/api/pedidos', async (req, res) => {
   try {
     const { pedidos } = await connectToMongoDB();
     const listaPedidos = await pedidos.find().toArray();
+    
     console.log(listaPedidos);
     res.json(listaPedidos);
 
