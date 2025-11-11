@@ -52,7 +52,7 @@ app.get('/api/menus', async (req, res) => {
 });
 
 //endppoint crear pedido.
-app.post('/api/Crearpedidos', async (req, res) => {
+app.post('/api/crearpedidos', async (req, res) => {
 
   const nuevoPedido = req.body;
 
