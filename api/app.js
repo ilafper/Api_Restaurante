@@ -22,7 +22,6 @@ async function connectToMongoDB() {
     const db = client.db('Restaurante');
     
     return {
-      menus: db.collection('menus'),
       pedidos: db.collection('Pedidos'),
     };
   } catch (error) {
@@ -38,18 +37,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//endpoint para obtener todos los usuarios
-app.get('/api/menus', async (req, res) => {
-  try {
-    const { menus } = await connectToMongoDB();
-    const listaMenus = await menus.find().toArray();
-    console.log(listaMenus);
-    res.json(listaMenus);
-  } catch (error) {
-    res.status(500).json({ error: 'Error al obtener los especialistas' });
-    console.log("nonononon");
-  }
-});
+
 
 //endppoint crear pedido.
 app.post('/api/crearpedidos', async (req, res) => {
